@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="styleGl.css">
+    <link rel="stylesheet" href="styleCust.css">
+
+    <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet">
+<style>
+
+</style>
+</head>
+
+<body>
+
+
+    <div class="container">
+
+        <div class="" id="">
+            <div class="alert alert-success" role="alert">
+                <img width="94" height="94" src="https://img.icons8.com/3d-fluency/94/ok.png" alt="ok"
+                    class="icon ic_s_error" />
+
+            </div>
+        </div>
+
+        <div class="" id="js-https-mismatch">
+            <div class="alert alert-primary" role="alert">
+                <img width="48" height="48" src="https://img.icons8.com/color/48/info--v1.png" alt="info--v1"
+                    class="icon ic_s_error" />
+
+            </div>
+        </div>
+
+
+        <div class="" id="js">
+            <div class="alert alert-danger" role="alert">
+                <img width="48" height="48" src="https://img.icons8.com/fluency/48/cancel.png" alt="cancel"
+                    class="icon ic_s_error" />
+
+            </div>
+        </div>
+
+        <form action="">
+            <div class="card">
+
+                <div class="cd-txt-align" id="maincontainer">
+                    <div class="card-head">
+                        Enregistrement des données
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <form id="myForm" onsubmit="handleFormSubmit(this)">
+                        <div id="message"></div>
+                        <input type="text" id="RecId" name="RecId" value="ID" style="display: none">
+
+                         <!-- Input type text -->
+                         <div class="form-group">
+                            <label for="nama">Nom & prénom (s)</label>
+                            <input type="text" class="form-control" name="nama" id="nama" required>
+                        </div>
+
+                        <!-- Input text grid -->
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col">
+                                    <label>Adresse email</label>
+                                    <input type="email" name="email" id="email" class="form-control"
+                                        required>
+                                </div>
+                                <div class="col">
+                                    <label>Téléphone</label>
+                                    <input type="number" name="telp" id="telp" class="form-control"
+                                        required>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </form>
+
+                    <!-- <fieldset>
+                        <div class="flex1">
+
+                            
+                            <div class="boxgroup">
+
+                                <div class="box">
+                                    <span class="titre">Taux assurance :</span>
+                                    <input type="text" class="fl-bx-inp-wt inp-pd" name="" />
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </fieldset> -->
+
+                </div>
+                <div class="card-foot">
+                    <div class="flexbtn">
+
+                        <div class="box">
+
+                            <input class="btn btn-primary w-100 bouton anime hv" value="Calculer" type="submit"
+                                name="calculer">
+                        </div>
+
+                        <div class="box">
+                            <input class="btn btn-primary w-100 bouton anime hv" value="Effacer" type="submit"
+                                id="input_go">
+                        </div>
+
+                        <div class="box">
+                            <input class="btn btn-danger w-100 bouton anime hv" value="Effacer" type="submit"
+                                id="input_go">
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <hr>
+              <button class="btn btn-outline-primary btn-sm" style="width:100px" type="button" id="tambah" data-bs-toggle='modal' data-bs-target="#myModal">Nouveau</button>
+            <hr>
+
+
+    <div class="container-fluid">
+        <!-- The Modal Form -->
+        <div class="moda" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h5>Formulaire d'ajout et de modification</h5>
+                        <button type="button" id="btn-close" class="btn-close" data-bs-dismiss="modal"
+                            onclick="clearForm();"></button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <!-- See Form.html file -->
+                        <!-- <?!= include('Form'); ?>  -->
+
+                        <!-- form -->
+
+                        <div class="card">
+                            <div class="card-head cd-head">Enregistrement des données</div>
+                            <div class="card-body">
+
+                                <form id="myForm" onsubmit="handleFormSubmit(this)">
+                                    <div id="message"></div>
+                                    <input type="text" id="RecId" name="RecId" value="ID" style="display: none">
+
+                                    <!-- Input type text -->
+                                    <div class="form-group">
+                                        <label for="nama">Nom & prénom (s)</label>
+                                        <input type="text" class="form-control" name="nama" id="nama" required>
+                                    </div>
+
+                                    <!-- Input text grid -->
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col">
+                                                <label>Adresse email</label>
+                                                <input type="email" name="email" id="email" class="form-control"
+                                                    required>
+                                            </div>
+                                            <div class="col">
+                                                <label>Téléphone</label>
+                                                <input type="number" name="telp" id="telp" class="form-control"
+                                                    required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <option value="Laki-Laki">Laki-Laki</option>
+                   <option value="Perempuan">Perempuan</option> -->
+                                    <!-- Input text grid -->
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col">
+                                                <label>Genre</label>
+                                                <select class="form-select" name="gender" id="gender">
+                                                    <option value="">---Genre---</option>
+                                                </select>
+                                            </div>
+                                            <div class="col">
+                                                <label>Date de naissance</label>
+                                                <input type="text" class="form-control" name="tglLahir" id="tglLahir"
+                                                    placeholder="Tanggal" onfocus="(this.type = 'date')" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Input text grid -->
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col">
+                                                <label>Pays</label>
+                                                <select class="form-select" name="kota" id="kota" required>
+                                                    <option value="">---Pays---</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+
+
+                        <!-- form -->
+
+
+                    </div>
+                    <!-- Modal footer -->
+
+                    <div class="card-foot">
+                    <div class="modal-footer">
+
+                        <div class="flexbtn">
+
+                            <div class="box">
+                                <button type="submit" class="btn btn-primary btn-sm w-100 bouton anime hv" form="myForm">Valider</button>
+
+                            </div>
+
+                            <div class="box">
+                                <button type="reset" class="btn btn-secondary btn-sm w-100 bouton anime hv" value="Reset"
+                                form="myForm">Annuler</button>
+
+                            </div>
+                            <div class="box">
+                                <button type="button" class="btn btn-danger btn-sm w-100 bouton anime hv" data-bs-dismiss="modal">Fermer</button>
+
+                            </div>
+
+                        </div>
+
+                        
+                       
+                       
+                    </div>
+
+                </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+</body>
+
+</html>
