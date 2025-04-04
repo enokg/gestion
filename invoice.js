@@ -1,5 +1,5 @@
-var AppsScriptLink = "AKfycbx_i6vjZPqYhKIJfBCIK6Px5inzFhz0dUTwKOG743b_Z0Lcw6TV_8X2yrF3Pc7oGsv6_g";
-//https://script.google.com/macros/s/AKfycbx_i6vjZPqYhKIJfBCIK6Px5inzFhz0dUTwKOG743b_Z0Lcw6TV_8X2yrF3Pc7oGsv6_g/exec
+var AppsScriptLink = "AKfycbw26z64CsR-MYWhQMqnn4Mh16GljVb4sNgbELYtDMa5O6p56vpfIvY4pzODmVyGxZ599A";
+window.addEventListener("load", init, true);
 function GetPrint() {
   /*For Print*/
   window.print();
@@ -55,21 +55,20 @@ function GetTotal() {
   document.getElementById("FTotal").value = sum;
 
   var gst = document.getElementById("FGST").value;
-  var net = +(sum) + +(gst);
+  var net = +(sum) - +(gst);
   document.getElementById("FNet").value = net;
 
 
 }
 
-$(document).ready(function () {
+function init () {
   FormValidation();
   SetCurrentDate();
   BtnAdd();
   FillDataList();
   MaxInv();
-
-
-});
+  
+};
 
 
 function FillDataList() {
@@ -206,6 +205,7 @@ function ShowAllData() {
       function (data) {
 
         var Table = "", Rows = "", Columns = "";
+
         $.each(data, function (key, value) {
           var InvNo = "";
           Columns = "";
@@ -230,3 +230,46 @@ function ShowAllData() {
   });
 
 }
+
+function LoadAllData() {
+  var result;
+  $.getJSON("https://script.google.com/a/~/macros/s/" + AppsScriptLink + "/exec?page=all",
+    function (data) {
+      // var result = "";
+      $.each(data, function (key, value) {
+        // result = result + '<span>' + value + '<span>
+        result = result + value;
+      })
+      
+      console.log(result);
+
+      if (result && result !== undefined && result.length != 0) {
+
+        let taille;
+        taille = result.length;
+        console.log(taille);
+            
+      }
+    
+    });
+}
+
+
+
+function Read() {
+  fetch("https://script.google.com/a/~/macros/s/" + AppsScriptLink + "/exec?page=all", {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      key: 'value'
+    })
+  })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
+
+}
+
+//console.log(gData)
