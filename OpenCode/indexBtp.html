@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <script src = "https://code.jquery.com/jquery-3.5.1.js" ></script>
+	<script src = "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/js/bootstrap.bundle.min.js" > </script> 
+	<script src = "https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js" > </script> 
+	<script src = "https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js" > </script> 
+	<script src = "https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js" > </script> 
+	<script src = "https://cdn.datatables.net/responsive/2.4.0/js/responsive.bootstrap5.min.js" > </script>
+
+    <link href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/b-2.3.5/b-html5-2.3.5/datatables.min.css"/> 
+    <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.3/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.bootstrap5.min.css" rel="stylesheet">
+ 
+    <!-- ----- -->
+    <!--  -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js" integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!--  -->
+    <!-- // -->
+   
+    <link rel="stylesheet" href="css/styleCust.css">
+
+    <script src="js/script.js"></script>
+  
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
+
+    <!-- /// -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/stylecard.css">
+   
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/3.2.2/css/buttons.dataTables.css" />
+    <!-- ------ -->
+    <!-- +++++ -->
+    
+
+</head>
+
+<body>
+
+    <!--  -->
+    <div class="container">
+        <div id="dialog-form" title="CREATION D'UNE FACTURE" class="dialog-form">
+            
+            <form method="POST" class="needs-validation" novalidate
+                action="https://script.google.com/a/~/macros/s/AKfycbw26z64CsR-MYWhQMqnn4Mh16GljVb4sNgbELYtDMa5O6p56vpfIvY4pzODmVyGxZ599A/exec">
+
+
+                <div class="row">
+                    <div class="col-60">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Nom</span>
+                            <input type="text" class="form-control" placeholder="Nom et prénom" name="cust_nm" required
+                                minlength="4">
+
+                            <div class="invalid-feedback">
+                                Veuillez saisir le nom du client </div>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Téléphone</span>
+                            <input type="text" class="form-control" placeholder="Téléphone" name="addr">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Ville</span>
+                            <input type="text" class="form-control" placeholder="Ville" name="city">
+                        </div>
+                    </div>
+
+                    <div class="col-35 col-flex100">
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Fact. N°</span>
+                            <input type="text" class="form-control" placeholder="Inv. No" id="inv_no" name="inv_no"
+                                autocomplete="off" required>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary btn-search" type="button" onclick="Search();">
+                                    <i class="fa-solid fa-magnifying-glass"></i></button>
+                            </div>
+                            <div class="valid-feedback">Le numéro Facture est
+                                OK</div>
+                        </div>
+
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Date Fact.</span>
+                            <input type="date" class="form-control" placeholder="Inv. Date" name="inv_dt">
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <input type="hidden" id="IsNew" name="IsNew" value="Y">
+                <input type="hidden" id="StartRow" name="StartRow" value="0">
+                <input type="hidden" id="RowCount" name="RowCount" value="0">
+                <!-- class="table table-bordered tabItem"  -->
+                <div class="container blocTab w3-responsive">
+                    <table class="mytab">
+                        <thead class="tab-head-center">                
+                            <tr>
+                                <th scope="col code">#</th>
+                                <th scope="col" class="th">DESIGNATION</th>
+                                <th scope="col" class="th">QTE</th>
+                                <th scope="col" class="th">PRIX</th>
+                                <th scope="col" class="th">MONTANT</th>
+
+                                <th scope="col" class="plus">
+                                    <button type="button" class="btn btn-sm btnplus" onclick="BtnAdd()"><i class="fa-solid ico fa-square-plus w3-text-teal"></i></button>
+                                </th>
+                            </tr>
+                        </thead>                    
+                        <tbody id="TBody">
+                            
+                            <tr id="TRow" class="d-none">
+                              
+                                <th scope="row">1</th>
+                                <td class="tab-td">
+                                    <input class="form-control text-control" name="item_nm" list="mylist" autocomplete="off"
+                                        required value="a">
+                                    <datalist id="mylist"></datalist>
+                                </td>
+                                <td class="tab-td"><input type="number" class="form-control text-end text-control" name="qty"
+                                        onchange="Calc(this);"></td>
+                                <td class="tab-td" ><input type="number" class="form-control text-end text-control" name="rate"
+                                        onchange="Calc(this);"></td>
+                                <td class="tab-td"><input type="number" class="form-control text-end text-control" name="amt" value="0" readonly="">
+                                </td>
+                                <td class="tab-td" >
+                                    <button type="button" class="btn btn-sm btn-danger"
+                                        onclick="BtnDel(this)"><i class="fa-solid ico fa-trash-can w3-text-red"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <br>                 
+                </div>
+                <!--  -->
+                <div class="row">
+                    <div class="col-35">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Total</span>
+                            <input type="number" class="form-control text-end" id="FTotal" name="FTotal"
+                                disabled="">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Remise</span>
+                            <input type="number" class="form-control text-end" id="FGST" name="FGST"
+                                onchange="GetTotal()">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Montant net</span>
+                            <input type="number" class="form-control text-end" id="FNet" name="FNet" disabled="">
+                        </div>
+                    </div>
+                    <div class="col-60">
+                        <button type="submit" class="btn btn-primary">Valider</button>
+                    </div>
+                </div>
+
+                <!--  -->
+            </form>
+        </div>
+    </div>
+    <!--  -->
+
+    <button id="create-user" style="display: none;">Create new user</button>
+
+    <div class="container">
+        <div class="card centrer cartTab">
+
+            <div class="card-body">
+                <div class="dt-buttons">
+                    <button class="dt-button" id="btnNew">NOUVEAU</button>
+                    <button class="dt-button" id="btnPdf">PDF</button>
+                    <button class="dt-button" id="btnExcel">EXCEL</button>
+                    <button class="dt-button" id="btnCsv">CSV</button>
+                    <button class="dt-button" id="btnCopie">COPIER</button>
+                    <button class="dt-button" id="btnMasque">MASQUER</button>
+                    <button class="dt-button" id="btnPrint">IMPRIMER</button>
+                    <button class="dt-button" id="btnPageL"><  ></button>
+                </div>
+                
+            </div>
+
+            <input type="text" class="form-control input-lg" placeholder="Rechercher..." id="searchBox">       
+        </div>
+    </div>
+
+    <div class="container mt-m0 mb-5">
+       
+        <table id="example" class="table mt-m0 table-striped table-bordered w3-table-all" cellspacing="0" width="100%">
+            <thead class="color-tb" style="white-space: nowrap">
+
+                <th>DATE</th>
+                <th>NOM & PRENOM(S)</th>
+                <th>WHATSAPP</th>
+                <th>TELEPHONE</th>
+                <th>VILLE</th>
+                <th></th>
+                <th></th>
+            </thead>
+            <tbody id="tbody">
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal fade" id="spinnerModal" role="dialog" aria-labelledby="spinnerModalLabel">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Lecture en cours...</span>
+                    </div>
+                    <p class="mt-3">Lecture en cours...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+
+    <!-- <script src="copen.js"></script> -->
+
+    <!-- ***** -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/3.2.2/js/dataTables.buttons.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/3.2.2/js/buttons.dataTables.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.colVis.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/3.2.2/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/3.2.2/js/buttons.print.min.js"></script>
+    
+    <!-- responsive -->
+    <script type="text/javascript"
+        src="https://cdn.datatables.net/responsive/3.0.4/js/dataTables.responsive.js"></script>
+    <script type="text/javascript"
+        src="https://cdn.datatables.net/responsive/3.0.4/js/responsive.dataTables.js"></script>
+    <!-- responsive -->
+    <!-- ******* -->
+   
+     
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>  
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+         
+</body>
+
+</html>

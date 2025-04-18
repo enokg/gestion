@@ -283,15 +283,11 @@ fieldset{
 .w3-table-all th { 
     position: sticky;
     top: 0px; 
-    text-align: center;
+    text-align: center !important;
     vertical-align: top;
     font-weight: normal;
-    /* border-left: 1px solid rgb(116, 225, 233);
-    background-color: rgb(0, 116, 205); 
-    color: #fff; */
     padding-top: 7px;
     padding-bottom: 7px;
-
     background-color: #133b5c;
     color: rgb(241, 245, 179);
     font-size: 18px;
@@ -316,7 +312,8 @@ fieldset{
     background: #090909 !important;
 }
 
-table {
+table 
+{
     min-width: max-content;
     border-collapse: separate;
     border-spacing: 0px;    
@@ -331,7 +328,7 @@ table th, table td {
 }
 
 table td {
-    text-align: left;
+    text-align: left !important;
     font-size: 15px;
     border: 1px solid rgb(177, 177, 177);
     padding-left: 20px;
@@ -658,58 +655,6 @@ legend {
     padding: 0;
     white-space: normal
 }
-/*  */
-.tool{
-    position: relative;
-    /* display: inline-block; */
-    border-bottom: 1px dotted black;
-  }
-  
-  .tool .tooltext {
-    visibility: hidden;
-    width: fit-content;
-    background-color: black !important;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding-right: 5px;
-    padding-left: 5px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    position: absolute;
-    z-index: 1;
-    /* bottom: 100%; */
-    font-size: 13px;
-    left: 50%;
-    margin-left: -60px;
-    top: 50px;
-    
-    /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
-    opacity: 0;
-    transition: opacity 1s;
-  }
-  .tool .tooltext::before{
-    content: '';
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-left: 6px solid transparent;
-            border-right: 6px solid transparent;
-            border-top: 10px solid #07df24;
-            top: -0.5em;
-            left: 50%;
-            transform: translate(-50%);
-  }
-  .tool:hover{
-    cursor: pointer;
-  }
-  
-  .tool:hover .tooltext {
-    visibility: visible;
-    opacity: 1;
-   
-  }
-/*  */
 
 
   /* marge */
@@ -717,41 +662,7 @@ legend {
     margin-top: 1.7rem !important
 }
 
-/* marge */
 
-  /* .................................... */
-  .flexbloc {
-    display: flex;
-    position: relative;
-    margin: 15px;
-    align-items: center;
-    align-self: center;
-    text-align: center;
-}
-
-.blockbtn {
-    background-color: #036ce4;
-    align-items: center;
-    display: flex;
-    align-self: center;
-    text-align: center;
-
-}
-
-.blockbtn i {
-    position: absolute;
-    font-size: 22px;
-    display: block;
-
-}
-
-.blockbtn .btnu {
-    display: block;
-}
-
-.blockbtn .btnd {
-    display: none;
-}
 
 .blockbtn:hover {
     cursor: pointer;
@@ -760,43 +671,7 @@ legend {
 }
 
 /* ................................... */
-.mybarre {
-    position: relative;
-    width: 100%;
-}
 
-.mybarre .content {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 2em;
-    border-radius: 0px;
-    background: #1f1f1f !important;
-    box-shadow: 3px 3px 2px #000, inset 1px 1px 1px #909090;
-    align-items: center;
-    text-align: center;
-}
-
-
-
-.mybarre .entete span {
-
-    position: relative;
-    color: #fff;
-    top: 8px;
-    padding: 10px;
-    box-shadow: none;
-    text-shadow: none;
-    font-size: 20px;
-    transform: translate(-50%, -50%);
-}
-
-.mybarre .content span {
-    color: #fff;
-    box-shadow: none;
-    text-shadow: none;
-    font-size: 20px;
-
-}
 
 .br-ent{
     -webkit-appearance: none;
@@ -849,58 +724,6 @@ legend {
     transform: scale(1.05);
 }
 
-.mybarre .blockbtnt {
-    position: relative;
-    width: fit-content;
-    font-size: 20px;
-    top: -1.2em;
-    left: 90%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    border-radius: 3px;
-    padding-left: 4px;
-    padding-right: 4px;
-    transition: transform 0.5s;
-    text-shadow: none;
-    /* box-shadow: 0px 3px 10px #1f1f1f, inset 0px 1px 2px #909090 !important; */
-}
-
-.mybarre .blockbtnt i {
-    color: rgb(7, 155, 223);
-    box-shadow:
-        inset 1px 1px 2px rgba(5, 20, 18, 0.20),
-        inset 1px 1px 2px rgba(5, 5, 5, 0.20),
-        inset 1px 1px 2px rgba(2, 48, 40, 0.55),
-        inset 1px 1px 2px rgba(2, 49, 41, 0.55) !important;
-
-    background-image: linear-gradient(to top left,
-            rgba(0, 0, 0, .2),
-            rgba(0, 0, 0, .2) 30%,
-            rgba(0, 0, 0, 0)) !important;
-    text-shadow: none;
-
-}
-
-.mybarre .content::before {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 10px solid rgb(3, 35, 49);
-    bottom: -0.8em;
-    left: 50%;
-    transform: translate(-50%);
-
-}
-
-.mybarre .blockbtnt:hover {
-    cursor: pointer;
-    transform: scale(1.05);
-}
-
-/* ................................. */
 
 .legende .blockbtnt:hover {
     cursor: pointer;
@@ -922,29 +745,6 @@ legend {
     font-weight: 100;
 }
 
-.blockbtnt i {
-    position: absolute;
-    display: block;
-}
-
-.legende .blockbtnt {
-    position: absolute;
-    margin: 2px;
-    left: 90%;
-    top: 10px;
-    transform: translate(-50%, -50%);
-    transition: transform 0.5s;
-    color: #2ae9c9;
-
-}
-
-.blockbtnt .btnu {
-    display: block;
-}
-
-.blockbtnt .btnd {
-    display: none;
-}
 
 .inputdate {
   
@@ -955,122 +755,11 @@ legend {
     background-color: #036ce4 !important;
 }
 
-/*slider range */
-.range-slider {
-    position: relative;
-    max-width: 30em;
-}
-
-.range-slider .slider {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 0.3em;
-    outline: none;
-    border-radius: 0px;
-    background: #1f1f1f !important;
-    box-shadow: 3px 3px 6px #000, inset 1px 1px 1px #909090;
-
-}
-
-.range-slider .slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 1.9em;
-    height: 1.9em;
-    cursor: pointer;
-    z-index: 3;
-    position: relative;
-}
-
-.range-slider .slider-thumb {
-    position: absolute;
-    width: 1.5em;
-    height: 1.5em;
-    background: #090909;
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    box-shadow: inset 0px 1px 2px #909090;
-}
-
-.range-slider .slider-thumb::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 0.8em;
-    height: 0.8em;
-    background: #333;
-    border-radius: inherit;
-    transition: 0.3s;
-}
-
-.range-slider:hover .slider-thumb::before{
-    background: #2ae9c9;
-}
-
-
-.range-slider .tooltip {
-    position: relative;
-    width: fit-content;
-    height: 2.4em;
-    top: -1.5em;
-    left: 50%;
-    font-size: 12px;
-    transform: translate(-50%, -50%);
-    background: #013c63ea !important;
-    text-align: center;
-    line-height: 25px !important;
-    color: #fff;
-    border-radius: 3px;
-    padding-left: 4px;
-    padding-right: 4px;
-    box-shadow: 0px 3px 10px #1f1f1f, inset 0px 1px 2px #909090 !important;
-}
-.range-slider .tooltip::before {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 10px solid #07df24;
-    bottom: -0.5em;
-    left: 50%;
-    transform: translate(-50%);
-}
-
-.range-slider .progress {
-    width: 50%;
-    height: 0.3em;
-    border-radius: 0px;
-    background: linear-gradient(90deg, #036ce4 0%, #2ae9c9 100%);
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 0;
-    pointer-events: none;
-}
-
-/* ................................. */
-
-
-
-/* ................................. */
-
-/* ................................. */
-
-
-/* ................................. */
-
 
 /* card */
 
 .card {
-    margin-top: 2rem;
+    margin-top: 1rem;
     margin-bottom: .5rem
 }
 
@@ -1168,168 +857,4 @@ legend {
 
 } 
 /* card */
-
-@media screen and (max-width: 700px) {
-    .neu-range-slider {
-        width: 100%;
-    }
-
-    .blok-container div.container {
-        text-align: left;
-        width: auto;
-        margin: 0 auto;
-    }
-
-    .col-form-label {
-        margin-top: 0 !important;
-
-    }
-
-    .form-control {
-        margin-bottom: 0.5rem !important;
-    }
-
-    .card-body .row {
-        margin-top: 0.2rem !important;
-        padding-top: 0rem !important;
-
-    }
-
-    .box {
-        margin-bottom: 0.1rem !important;
-    }
-
-    .slid {
-        margin-top: 2.2rem !important;
-    }
-
-    .boxgroup {
-        margin-top: 0px;
-    }
-
-    .track {
-        display: flex;
-    }
-
-    .w3-responsive .msg {
-        width: 100% !important;
-    }
-
-    .inputdate {
-
-        width: 100% !important;
-    }
-
-.w3-table,
-.w3-table-all {
-    
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
-.w3-table-all th{
-    padding-left: 10px !important;
-    padding-right: 10px !important;
-    padding-top: 10px;
-    padding-bottom: 10px; 
-    min-width: min-content;
-}
-
-.w3-table-all td{
-    padding-left: 30px;
-    min-width: min-content;
-    text-align: center;
-
-}
-.mybarre .entete span{
-    font-size:inherit;
-}
-
-}
-
-@media screen and (max-width: 740px) {
-    .neu-range-slider {
-        width: 100%;
-    }
-
-    .blok-container div.container {
-        text-align: left;
-        width: auto;
-        margin: 0 auto;
-
-    }
-
-    .container-tab div.container {
-        text-align: left;
-        width: auto;
-        margin: 0 auto;
-
-    }
-
-    .container-tab .w3-table-all th {
-        padding-left: 10px;
-        padding-right: 10px;
-
-    }
-
-    .input {
-        width: 100%;
-    }
-
-    .input-select {
-        width: 100% !important;
-    }
-
-    .box {
-        width: 100%;
-
-    }
-
-    .boxgroup {
-
-        margin-top: 0;
-    }
-
-    .range-slider .tooltip,
-    .range-slider1 .tooltip1,
-    .range-slidera .tooltipa,
-    .range-sliderk .tooltipk {
-        display: 0;
-    }
-
-    .track {
-        display: inline-block;
-        position: absolute;
-    }
-
-    .bouton {
-        width: 100% !important;
-        margin-bottom: 7px;
-    }
-
-    .flex1 .boxgroup {
-        margin-top: 0;
-    }
-
-    .legende {
-        display: block;
-        text-align: center;
-        align-items: center;
-        background-color: rgb(24, 24, 24);
-        color: #fff;
-        margin-bottom: 0;
-    }
-
-    .legende span {
-        color: #07df24;
-        font-size: 20px;
-        padding-right: 20px;
-        margin-right: 20px;
-    }
-
-    .inputdate {
-
-        width: 100% !important;
-    }
-}
 

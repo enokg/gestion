@@ -1,0 +1,3 @@
+cd C:\Program Files\Microsoft Office\Office16
+cscript ospp.vbs /sethst:kms.03k.org
+cscript ospp.vbs /act

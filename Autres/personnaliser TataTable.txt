@@ -1,0 +1,1085 @@
+"pageLength":5,
+"responsive":true,
+"lengthChange":false,
+
+createdRow: (row, data, index) => {
+        if (data[5].replace(/[\$,]/g, '') * 1 > 150000) {
+            row.querySelector(':nth-child(6)').classList.add('highlight');
+        }
+    },
+columnDefs: [{ visible: false, targets: groupColumn }],
+    order: [[groupColumn, 'asc']],
+    displayLength: 25,
+    drawCallback: function (settings) {
+        var api = this.api();
+        var rows = api.rows({ page: 'current' }).nodes();
+        var last = null;
+ 
+        api.column(groupColumn, { page: 'current' })
+            .data()
+            .each(function (group, i) {
+                if (last !== group) {
+                    $(rows)
+                        .eq(i)
+                        .before(
+                            '<tr class="group"><td colspan="5">' +
+                                group +
+                                '</td></tr>'
+                        );
+ 
+                    last = group;
+                }
+            });
+    },
+
+
+$('#example tbody').on('click', 'tr.group', function () {
+    var currentOrder = table.order()[0];
+    if (currentOrder[0] === groupColumn && currentOrder[1] === 'asc') {
+        table.order([groupColumn, 'desc']).draw();
+    }
+    else {
+        table.order([groupColumn, 'asc']).draw();
+    }
+});
+
+"language":{
+
+"emptyTable" : "Aucune élément trouvé",
+"info" : "",
+"infoEmpty" : "Aucune donnée disponible",
+"loadingRecords" : "Chargement...",
+"processing" : "En cours...",
+"search" : "Rechercher",
+"zeroRecords" : "L'élément recherché n'existe pas",
+"paginate":{
+"first": "Premier",
+"last": "Dernier",
+"next": "Suivant",
+"previous": "Précédent",
+
+}
+
+},
+
+footerCallback: function (row, data, start, end, display) {
+        let api = this.api();
+ 
+        // Remove the formatting to get integer data for summation
+        let intVal = function (i) {
+            return typeof i === 'string'
+                ? i.replace(/[\$,]/g, '') * 1
+                : typeof i === 'number'
+                ? i
+                : 0;
+        };
+ 
+        // Total over all pages
+        total = api
+            .column(4)
+            .data()
+            .reduce((a, b) => intVal(a) + intVal(b), 0);
+ 
+        // Total over this page
+        pageTotal = api
+            .column(4, { page: 'current' })
+            .data()
+            .reduce((a, b) => intVal(a) + intVal(b), 0);
+ 
+        // Update footer
+        api.column(4).footer().innerHTML =
+            '$' + pageTotal + ' ( $' + total + ' total)';
+    },
+
+    columns: [
+        null,
+        null,
+        { orderSequence: ['asc', ''] },
+        { orderSequence: ['desc', 'asc', ''] },
+        { orderSequence: ['desc'] },
+        null
+    ]
+
+    //
+    var stock_data = [
+    {
+        name: 'ACME Gadgets',
+        symbol: 'AGDTS',
+        values: [ 42, 20, 30, 35, 9, 48, 12, 5]
+    },
+    {
+        name: 'Spry Media Productions',
+        symbol: 'SPMP',
+        values: [40, 37, 16, 43, 13, 18, 19]
+    },
+    {
+        name: 'Widget Emporium',
+        symbol: 'WDEMP',
+        values: [35, 40, 6, 15, 48, 16, 44, 49]
+    },
+    {
+        name: 'Sole Goodman',
+        symbol: 'SGMAN',
+        values: [25, 27, 4, 40, 7, 8, 18, 16]
+    },
+    {
+        name: 'Stanler Bits and Bobs',
+        symbol: 'SBIBO',
+        values: [13, 25, 13, 38, 40, 34, 40, 47]
+    }
+];
+ 
+let table = new DataTable('#example', {
+    data: stock_data,
+    columns: [
+        { data: 'name' },
+        { data: 'symbol' },
+        {
+            data: 'values',
+            render: data => data[data.length - 1].toFixed(2)
+        },
+        {
+            data: 'values',
+            render: function (data, type) {
+                // Calculate the different between the last two values
+                let val = (
+                    data[data.length - 1] -
+                    data[data.length - 2]
+                ).toFixed(2);
+ 
+                let colour = val < 0 ? 'red' : 'green';
+ 
+                return type === 'display'
+                    ? '<span style="color:' + colour + '">' + val + '</span>'
+                    : val;
+            }
+        },
+        {
+            data: 'values',
+            render: function (data, type) {
+                if (type === 'display') {
+                    // Create the SVG element the spark line will live in (needs the correct name space)
+                    let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+ 
+                    svg.setAttribute('class', 'sparkline');
+                    svg.setAttribute('width', 250);
+                    svg.setAttribute('height', 17);
+                    svg.setAttribute('stroke-width', 3);
+ 
+                    // Use the plug-in to create the lines
+                    sparkline.default(svg, data);
+ 
+                    return svg;
+                }
+ 
+                // Otherwise give the last value
+                return data[data.length-1];
+            }
+        }
+    ]
+});
+//
+const table = new DataTable('#example');
+ 
+table.on('click', 'tbody tr', function (e) {
+    e.currentTarget.classList.toggle('selected');
+});
+ 
+document.querySelector('#button').addEventListener('click', function () {
+    alert(table.rows('.selected').data().length + ' row(s) selected');
+});
+//
+const table = new DataTable('#example');
+ 
+table.on('click', 'tbody tr', (e) => {
+    let classList = e.currentTarget.classList;
+ 
+    if (classList.contains('selected')) {
+        classList.remove('selected');
+    }
+    else {
+        table.rows('.selected').nodes().each((row) => row.classList.remove('selected'));
+        classList.add('selected');
+    }
+});
+ 
+document.querySelector('#button').addEventListener('click', function () {
+    table.row('.selected').remove().draw(false);
+});
+
+//index colonne
+const table = new DataTable('#example', {
+    columnDefs: [
+        {
+            searchable: false,
+            orderable: false,
+            targets: 0
+        }
+    ],
+    order: [[1, 'asc']]
+});
+ 
+table
+    .on('order.dt search.dt', function () {
+        let i = 1;
+ 
+        table
+            .cells(null, 0, { search: 'applied', order: 'applied' })
+            .every(function (cell) {
+                this.data(i++);
+            });
+    })
+    .draw();
+
+    //
+    const table = new DataTable('#example', {
+    paging: false,
+    scrollY: '200px'
+});
+ 
+document.querySelectorAll('a.toggle-vis').forEach((el) => {
+    el.addEventListener('click', function (e) {
+        e.preventDefault();
+ 
+        let columnIdx = e.target.getAttribute('data-column');
+        let column = table.column(columnIdx);
+ 
+        // Toggle the visibility
+        column.visible(!column.visible());
+    });
+});
+//Using API in callbacks
+new DataTable('#example', {
+    initComplete: function () {
+        let api = this.api();
+ 
+        api.on('click', 'tbody td', function () {
+            api.search(this.innerHTML).draw();
+        });
+    }
+});
+//Scrolling and Bootstrap tabs
+new DataTable('table.table', {
+    ajax: '../ajax/data/arrays.txt',
+    paging: false,
+    scrollCollapse: true,
+    scrollY: 200
+});
+ 
+// Apply a search to the second table for the demo
+new DataTable.Api('#myTable2').search('New York').draw();
+
+//HighCharts Integration
+// Create DataTable
+const table = new DataTable('#example');
+ 
+// Create chart
+const chart = Highcharts.chart('demo-output', {
+    chart: {
+        type: 'pie',
+        styledMode: true
+    },
+    title: {
+        text: 'Staff Count Per Position'
+    },
+    series: [
+        {
+            data: chartData(table)
+        }
+    ]
+});
+ 
+// On each draw, update the data in the chart
+table.on('draw', function () {
+    chart.series[0].setData(chartData(table));
+});
+ 
+function chartData(table) {
+    var counts = {};
+ 
+    // Count the number of entries for each position
+    table
+        .column(1, { search: 'applied' })
+        .data()
+        .each(function (val) {
+            if (counts[val]) {
+                counts[val] += 1;
+            }
+            else {
+                counts[val] = 1;
+            }
+        });
+ 
+    return Object.entries(counts).map((e) => ({
+        name: e[0],
+        y: e[1]
+    }));
+}
+//
+new DataTable('#example', {
+    columnDefs: [
+        {
+            targets: 4,
+            render: DataTable.render.date()
+        }
+    ]
+});
+//
+new DataTable('#example', {
+    scrollX: true,
+    scrollY: 200
+});
+
+//Scroll - vertical, dynamic height
+new DataTable('#example', {
+    paging: false,
+    scrollCollapse: true,
+    scrollY: '50vh'
+});
+//Data rendering
+new DataTable('#example', {
+    ajax: '../ajax/data/objects_salary.txt',
+    columns: [
+        {
+            data: 'name'
+        },
+        {
+            data: 'position',
+            render: function (data, type) {
+                if (type === 'display') {
+                    let link = 'https://datatables.net';
+ 
+                    if (data[0] < 'H') {
+                        link = 'https://cloudtables.com';
+                    }
+                    else if (data[0] < 'S') {
+                        link = 'https://editor.datatables.net';
+                    }
+ 
+                    return '<a href="' + link + '">' + data + '</a>';
+                }
+ 
+                return data;
+            }
+        },
+        {
+            className: 'f32', // used by world-flags-sprite library
+            data: 'office',
+            render: function (data, type) {
+                if (type === 'display') {
+                    let country = '';
+ 
+                    switch (data) {
+                        case 'Argentina':
+                            country = 'ar';
+                            break;
+                        case 'Edinburgh':
+                            country = '_Scotland';
+                            break;
+                        case 'London':
+                            country = '_England';
+                            break;
+                        case 'New York':
+                        case 'San Francisco':
+                            country = 'us';
+                            break;
+                        case 'Sydney':
+                            country = 'au';
+                            break;
+                        case 'Tokyo':
+                            country = 'jp';
+                            break;
+                    }
+ 
+                    return '<span class="flag ' + country + '"></span> ' + data;
+                }
+ 
+                return data;
+            }
+        },
+        {
+            data: 'extn',
+            render: function (data, type, row, meta) {
+                return type === 'display'
+                    ? '<progress value="' + data + '" max="9999"></progress>'
+                    : data;
+            }
+        },
+        {
+            data: 'start_date'
+        },
+        {
+            data: 'salary',
+            render: function (data, type) {
+                var number = DataTable.render
+                    .number(',', '.', 2, '$')
+                    .display(data);
+ 
+                if (type === 'display') {
+                    let color = 'green';
+                    if (data < 250000) {
+                        color = 'red';
+                    }
+                    else if (data < 500000) {
+                        color = 'orange';
+                    }
+ 
+                    return `<span style="color:${color}">${number}</span>`;
+                }
+ 
+                return number;
+            }
+        }
+    ]
+});
+
+//Alternative pagination
+new DataTable('#example', {
+    layout: {
+        bottomEnd: {
+            paging: {
+                firstLast: false
+            }
+        }
+    }
+});
+
+//
+new DataTable('#example', {
+    layout: {
+        topStart: 'info',
+        bottom: 'paging',
+        bottomStart: null,
+        bottomEnd: null
+    }
+});
+//
+new DataTable('#example', {
+    layout: {
+        topStart: {
+            pageLength: {
+                menu: [ 10, 25, 50, 100 ]
+            }
+        },
+        topEnd: {
+            search: {
+                placeholder: 'Type search here'
+            }
+        },
+        bottomEnd: {
+            paging: {
+                buttons: 3
+            }
+        }
+    }
+});
+//
+$('#myTable').DataTable( {
+    fixedHeader: true
+} );
+
+new DataTable('#myTable', {
+    language: {
+        select: {
+            rows: {
+                _: 'Selected %d rows',
+                1: 'Selected 1 row'
+            }
+        }
+    },
+    select: true
+});
+
+new DataTable('#myTable', {
+    language: {
+        select: {
+            cells: '%d cells selected'
+        }
+    },
+    select: true
+});
+
+
+{
+    "decimal":        "",
+    "emptyTable":     "No data available in table",
+    "info":           "Showing _START_ to _END_ of _TOTAL_ entries",
+    "infoEmpty":      "Showing 0 to 0 of 0 entries",
+    infoFiltered:   "(filtré sur _MAX_ entrées au total)",
+    "infoPostFix":    "",
+    "thousands":      ",",
+    "lengthMenu":     "Afficher _MENU_ entrées",
+    "loadingRecords": "Loading...",
+    "processing":     "",
+    "search":         "Search:",
+    "zeroRecords":    "No matching records found",
+    "paginate": {
+        "first":      "First",
+        "last":       "Last",
+        "next":       "Next",
+        "previous":   "Previous"
+    },
+    "aria": {
+        "orderable":  "Order by this column",
+        "orderableReverse": "Reverse order this column"
+    }
+}
+
+
+$(document).ready(function () {
+	//Only needed for the filename of export files.
+	//Normally set in the title tag of your page.
+	document.title = "Card View DataTable";
+	// DataTable initialisation
+	$("#example").DataTable({
+		dom: '<"dt-buttons"Bf><"clear">lirtp',
+		paging: true,
+		autoWidth: true,
+		buttons: [
+			"colvis",
+			"copyHtml5",
+			"csvHtml5",
+			"excelHtml5",
+			"pdfHtml5",
+			"print"
+		],
+
+		initComplete: function (settings, json) 
+    {
+			$(".dt-buttons .btn-group").append(
+				'<a id="cv" class="btn btn-primary" href="#">CARD VIEW</a>'
+			);
+			$("#cv").on("click", function () {
+				if ($("#example").hasClass("card")) {
+					$(".colHeader").remove();
+				} else {
+					var labels = [];
+					$("#example thead th").each(function () {
+						labels.push($(this).text());
+					});
+					$("#example tbody tr").each(function () {
+						$(this)
+							.find("td")
+							.each(function (column) {
+								$("<span class='colHeader'>" + labels[column] + ":</span>").prependTo(
+									$(this)
+								);
+							});
+					});
+				}
+				$("#example").toggleClass("card");
+			});
+		}
+	});
+});
+new DataTable('#example', {
+    responsive: {
+        details: {
+            renderer: function (api, rowIdx, columns) {
+                let data = columns
+                    .map((col, i) => {
+                        return col.hidden
+                            ? '<tr data-dt-row="' +
+                                    col.rowIndex +
+                                    '" data-dt-column="' +
+                                    col.columnIndex +
+                                    '">' +
+                                    '<td>' +
+                                    col.title +
+                                    ':' +
+                                    '</td> ' +
+                                    '<td>' +
+                                    col.data +
+                                    '</td>' +
+                                    '</tr>'
+                            : '';
+                    })
+                    .join('');
+ 
+                let table = document.createElement('table');
+                table.innerHTML = data;
+ 
+                return data ? table : false;
+            }
+        }
+    }
+});
+
+https://cdnjs.cloudflare.com/ajax/libs/bulma/1.0.1/css/bulma.min.css
+https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css
+https://cdn.datatables.net/2.2.2/css/dataTables.bulma.css
+https://cdn.datatables.net/responsive/3.0.4/css/responsive.bulma.css
+new DataTable('#example', {
+    responsive: {
+        details: {
+            display: DataTable.Responsive.display.modal({
+                header: function (row) {
+                    var data = row.data();
+                    return 'Details for ' + data[0] + ' ' + data[1];
+                }
+            }),
+            renderer: DataTable.Responsive.renderer.tableAll({
+                tableClass: 'table'
+            })
+        }
+    }
+});
+https://code.jquery.com/jquery-3.7.1.js
+https://cdn.datatables.net/2.2.2/js/dataTables.js
+https://cdn.datatables.net/2.2.2/js/dataTables.bulma.js
+https://cdn.datatables.net/responsive/3.0.4/js/dataTables.responsive.js
+https://cdn.datatables.net/responsive/3.0.4/js/responsive.bulma.js
+
+
+
+
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.2.2/css/dataTables.jqueryui.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/3.0.4/css/responsive.jqueryui.css" />
+
+
+new DataTable('#example', {
+    responsive: {
+        details: {
+            display: DataTable.Responsive.display.modal({
+                header: function (row) {
+                    var data = row.data();
+                    return 'Details for ' + data[0] + ' ' + data[1];
+                }
+            }),
+            renderer: DataTable.Responsive.renderer.tableAll()
+        }
+    }
+});
+
+
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+<script type="text/javascript" src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/2.2.2/js/dataTables.jqueryui.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/3.0.4/js/dataTables.responsive.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/3.0.4/js/responsive.jqueryui.js"></script>
+
+
+
+<table class="w3-table-all">
+                                        <!-- class="table-success " -->
+                                        <thead class="color-tb" style="white-space: nowrap">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Designation</th>
+                                                <th scope="col" class="text-end">Qty</th>
+                                                <th scope="col" class="text-end">Prix.Ut</th>
+                                                <th scope="col" class="text-end">Montant</th>
+                                                <th scope="col" class="NoPrint">
+                                                    <button type="button" class="btn btn-sm btn-success"
+                                                        onclick="BtnAdd()">+</button>
+                                                </th>
+    
+                                            </tr>
+                                        </thead>
+                                        <tbody id="TBody">
+                                            <tr id="TRow" class="d-none">
+                                                <th scope="row">1</th>
+                                                <td>
+                                                    <input class="form-control" name="item_nm" list="mylist"
+                                                        autocomplete="off" required value="a">
+                                                    <datalist id="mylist"></datalist>
+                                                </td>
+
+                                                <td><input type="number" class="form-control text-end" name="qty"
+                                                        onchange="Calc(this);"></td>
+                                                <td><input type="number" class="form-control text-end" name="rate"
+                                                        onchange="Calc(this);"></td>
+                                                <td><input type="number" class="form-control text-end" name="amt" value="0"
+                                                        readonly="">
+                                                </td>
+                                                <td class="NoPrint">
+                                                    <button type="button" class="btn btn-sm btn-danger"
+                                                        onclick="BtnDel(this)">X</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+
+
+
+function BtnAddPlus() {
+  /*Add Button*/
+  var v = $("#Arow").clone().appendTo("#show_item");
+  $(v).find("input").val('');
+  $(v).removeClass("d-don");
+  // $(v).find("th").first().html($('tr').length - 2);
+}
+
+function BtnDelete(v) {
+  /*Delete Button*/
+  $(v).parent().parent().remove();
+  // GetTotal();
+ 
+  }
+function BtnAdd() {
+  /*Add Button*/
+  var v = $("#TRow").clone().appendTo("#TBody");
+  $(v).find("input").val('');
+  $(v).removeClass("d-none");
+  $(v).find("th").first().html($('tr').length - 2);
+}
+
+function BtnDel(v) {
+  /*Delete Button*/
+  $(v).parent().parent().remove();
+  GetTotal();
+  ReGenSrNo();
+}
+
+function ReGenSrNo() {
+  $("#TBody").find("tr").each(
+    function (index) {
+      $(this).find("th").first().html(index);
+    }
+  );
+}
+
+function Calc(v) {
+  /*Detail Calculation Each Row*/
+  var index = $(v).parent().parent().index();
+
+  var qty = document.getElementsByName("qty")[index].value;
+  var rate = document.getElementsByName("rate")[index].value;
+
+  var amt = qty * rate;
+  document.getElementsByName("amt")[index].value = amt;
+
+  GetTotal();
+}
+
+function GetTotal() {
+  /*Footer Calculation*/
+
+  var sum = 0;
+  var amts = document.getElementsByName("amt");
+
+  for (let index = 0; index < amts.length; index++) {
+    var amt = amts[index].value;
+    sum = +(sum) + +(amt);
+  }
+
+  document.getElementById("FTotal").value = sum;
+
+  var gst = document.getElementById("FGST").value;
+  var net = +(sum) - +(gst);
+  document.getElementById("FNet").value = net;
+
+
+}
+
+
+<div class="col-5">
+                                        <button type="submit" class="btn btnN btn-add add" onclick="BtnAddPlus()"><i class="fa-solid ico fa-square-plus w3-text-teal"></i></button>
+                                    </div>
+                                    <div id="show_item">
+                                        <div class="row d-don" id="Arow">
+                                            <!--  -->
+                                            <div class="row-6">
+                                                1
+                                            </div>    
+                                            <!--  -->
+                                            <div class="col-60">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text">DESIGNAT.</span>
+                                                    <input class="form-control" placeholder="Désignation" name="item_nm" list="mylist"
+                                                    autocomplete="off" required value="a">
+                                                        <datalist id="mylist"></datalist>
+                                                </div>
+
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text">QTE</span>
+                                                    <input type="number" class="form-control" placeholder="Quantite"  onchange="Calc(this);"
+                                                    name="qty">
+                                                </div>
+
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text">PRIX</span>
+                                                    <input type="number" class="form-control" placeholder="Prix"
+                                                    name="rate" onchange="Calc(this);">
+                                                </div>
+
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text">MONTANT</span>
+                                                    <input type="text" class="form-control" placeholder="Montant"
+                                                    name="amt" value="0"
+                                                    readonly="">
+                                               </div>
+
+                                            </div>
+                                           
+                                            <div class="col-5">
+                                                <button type="submit" class="btn btnN btn-del" onclick="BtnDelete(this)"><i class="fa-solid ico fa-trash-can w3-text-red"></i></button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+
+                                     
+                            <table class=".w3-table-all">
+                                <thead class="table-success">
+                                    <tr>
+
+                                        <th scope="col" class="NoPrint">
+                                            <button type="button" class="btn btn-sm btn-success"
+                                                onclick="BtnAdd()">+</button>
+                                        </th>
+                                        <!-- <th scope="col">#</th> -->
+                                        <th scope="col"></th>
+                                        <th scope="col" class="text-end"></th>
+                                        <th scope="col" class="text-end"></th>
+                                        <th scope="col" class="text-end"></th>
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody id="TBody">
+                                    <tr id="TRow" class="d-none">
+                                  <th scope="row">1</th>
+                                <div class="col-35">
+                                        <td class="tab-td">
+                                            <div class="input-group">
+                                                <span class="input-group-text txt">DESIGNAT.</span>
+                                                <input class="form-control text-control" placeholder="Désignation" name="item_nm" list="mylist"
+                                                autocomplete="off" required value="a">
+                                                    <datalist id="mylist"></datalist>
+                                            </div>
+                                                                                       
+                                        </td>
+                                 
+                                        <td class="tab-td">
+                                            <div class="input-group">
+                                                <span class="input-group-text txt">QTE</span>
+                                                <input type="number" class="form-control text-end text-control"
+                                                name="qty" onchange="Calc(this);">
+                                            </div>
+
+                                        </td>
+                                        <td class="tab-td">
+                                            <div class="input-group">
+                                                <span class="input-group-text txt">PRIX</span>
+                                                <input type="number" class="form-control text-end text-control"
+                                                name="rate" onchange="Calc(this);">
+                                            </div>
+
+                                        </td>
+
+                                        <td class="tab-td">
+                                            <div class="input-group">
+                                                <span class="input-group-text txt">MONTANT</span>
+                                                <input type="number" class="form-control text-end text-control"
+                                                name="amt" value="0" readonly="">
+                                            </div>
+
+                                        </td>                                
+                                   
+                                </div>
+                                        <div class="col-35">
+                                            <td class="NoPrint">
+                                                <button type="button" class="btn btn-sm btn-danger" onclick="BtnDel(this)">X</button>
+                                            </td>
+
+                                        </div>     
+                                       
+
+                                    </tr>
+                                </tbody>
+                            </table>
+
+Contrôle d'entrée sans filtrage :
+/* Results in:
+    {length}
+    {processing}
+    {table}
+    {information}
+    {pagination}
+*/
+new DataTable('#myTable', {
+    dom: 'lrtip'
+});
+ 
+// As of DataTables 2, use `layout`:
+ 
+new DataTable('#myTable', {
+  layout: {
+    topEnd: null
+  }
+});
+
+Élément wrapper plus simple :
+/* Results in:
+    <div class="wrapper">
+      {filter}
+      {length}
+      {information}
+      {pagination}
+      {table}
+    </div>
+*/
+new DataTable('#myTable', {
+    dom: '<"wrapper"flipt>'
+});
+
+Longueur et filtre ci-dessus, informations et pagination ci-dessous tableau :
+/* Results in:
+    <div>
+      {length}
+      {filter}
+      <div>
+        {table}
+      </div>
+      {information}
+      {pagination}
+    </div>
+*/
+new DataTable('#myTable', {
+    dom: '<lf<t>ip>'
+});
+
+
+Résumé du tableau en en-tête, filtrage, longueur et traitement en pied de page, avec un élément de compensation.
+/* Results in:
+    <div class="top">
+      {information}
+    </div>
+    {processing}
+    {table}
+    <div class="bottom">
+      {filter}
+      {length}
+      {pagination}
+    </div>
+    <div class="clear"></div>
+*/
+new DataTable('#myTable', {
+    dom: '<"top"i>rt<"bottom"flp><"clear">'
+});
+
+
+new DataTable('#example', {
+    initComplete: function () {
+        this.api()
+            .columns()
+            .every(function () {
+                var column = this;
+                var title = column.footer().textContent;
+ 
+                // Create input element and add event listener
+                $('<input type="text" placeholder="Search ' + title + '" />')
+                    .appendTo($(column.footer()).empty())
+                    .on('keyup change clear', function () {
+                        if (column.search() !== this.value) {
+                            column.search(this.value).draw();
+                        }
+                    });
+            });
+    },
+    layout: {
+        top1: {
+            searchPanes: {
+                viewTotal: true
+            }
+        }
+    }
+});
+
+new DataTable('#example', {
+    ajax: '../resources/objects.json',
+    columnDefs: [
+        {
+            searchPanes: {
+                show: true
+            },
+            targets: [5]
+        }
+    ],
+    columns: [
+        {
+            data: null,
+            render: function (data, type, row) {
+                // Combine the first and last names into a single table field
+                return data.first_name + ' ' + data.last_name;
+            }
+        },
+        { data: 'position' },
+        { data: 'office' },
+        { data: 'extn' },
+        { data: 'start_date' },
+        {
+            data: 'salary',
+            render: function (data, type, row) {
+                if (type === 'sort' || type === 'type') {
+                    return row.salary;
+                }
+                if (row.salary <= 200000) {
+                    return 'Low';
+                }
+                else if (row.salary <= 800000) {
+                    return 'Medium';
+                }
+                else {
+                    return 'High';
+                }
+            }
+        }
+    ],
+    layout: {
+        top1: {
+            searchPanes: {
+                columns: [5]
+            }
+        }
+    }
+});
+
+new DataTable('#example', {
+    layout: {
+        topStart: {
+            buttons: [
+                {
+                    extend: 'collection',
+                    className: 'custom-html-collection',
+                    buttons: [
+                        '<h3>Export</h3>',
+                        'pdf',
+                        'csv',
+                        'excel',
+                        '<h3 class="not-top-heading">Column Visibility</h3>',
+                        'columnsToggle'
+                    ]
+                }
+            ]
+        }
+    }
+});
+
+new DataTable('#example', {
+    layout: {
+        topStart: {
+            buttons: [
+                'copy',
+                'print',
+                {
+                    extend: 'spacer',
+                    style: 'bar',
+                    text: 'Export files:'
+                },
+                'csv',
+                'excel',
+                'spacer',
+                'pdf'
+            ]
+        }
+    }
+});

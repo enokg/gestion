@@ -1,0 +1,129 @@
+<link href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/b-2.3.5/b-html5-2.3.5/datatables.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/1.13.3/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.bootstrap5.min.css" rel="stylesheet">
+
+
+
+<!-- ----- -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/3.2.2/css/buttons.dataTables.css" />
+<!-- ------ -->
+
+
+
+<!-- ***** -->
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/3.2.2/js/dataTables.buttons.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/3.2.2/js/buttons.dataTables.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/3.2.2/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/3.2.2/js/buttons.print.min.js"></script>
+
+<!-- ******* -->
+
+
+//
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/js/bootstrap.bundle.min.js"> </script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"> </script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js"> </script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"> </script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.4.0/js/responsive.bootstrap5.min.js"> </script>
+
+
+
+
+
+
+new DataTable('#example', {
+    layout: {
+        topStart: {
+            buttons: [
+                {
+                    extend: 'collection',
+                    text: 'Table control',
+                    buttons: [
+                        {
+                            text: 'Toggle start date',
+                            action: function (e, dt, node, config) {
+                                dt.column(-2).visible(!dt.column(-2).visible());
+                            }
+                        },
+                        {
+                            text: 'Toggle salary',
+                            action: function (e, dt, node, config) {
+                                dt.column(-1).visible(!dt.column(-1).visible());
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+});
+
+
+
+$('#example').DataTable( 
+    
+{<font></font>
+    language: 
+    {<font></font>
+        processing:     "Traitement en cours...",<font></font>
+        search:         "Rechercher&nbsp;:",<font></font>
+        lengthMenu:    "Afficher _MENU_ &eacute;l&eacute;ments",<font></font>
+        info:           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",<font></font>
+        infoEmpty:      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",<font></font>
+        infoFiltered:   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",<font></font>
+        infoPostFix:    "",<font></font>
+        loadingRecords: "Chargement en cours...",<font></font>
+        zeroRecords:    "Aucun &eacute;l&eacute;ment &agrave; afficher",<font></font>
+        emptyTable:     "Aucune donnée disponible dans le tableau",<font></font>
+        paginate: 
+        {<font></font>
+            first:      "Premier",<font></font>
+            previous:   "Pr&eacute;c&eacute;dent",<font></font>
+            next:       "Suivant",<font></font>
+            last:       "Dernier"<font></font>
+        },<font></font>
+        aria: 
+        {<font></font>
+            sortAscending:  ": activer pour trier la colonne par ordre croissant",<font></font>
+            sortDescending: ": activer pour trier la colonne par ordre décroissant"<font></font>
+        }<font></font>
+    }<font></font>
+} 
+
+);<font></font>
+
+
+
+
+
+language: {
+    emptyTable: "Aucune élément trouvé",
+    info: "Afficher _PAGE_ sur _PAGES_",
+    infoEmpty: "Aucune donnée disponible",
+    loadingRecords: "Chargement...",
+    processing: "En cours...",
+    search: "Rechercher",
+    zeroRecords: "L'élément recherché n'existe pas",
+    decimal: ',',
+    thousands: '.',
+    lengthMenu: "Afficher _MENU_ entrées",
+    infoFiltered: "(filtré sur _MAX_ entrées au total)",
+   
+    paginate:
+    {
+      first: "Premier",
+      last: "Dernier",
+      next: "Suivant",
+      previous: "Précédent",
+    }
+  },

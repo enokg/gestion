@@ -1,0 +1,342 @@
+@font-face {
+    font-family: 'Trebuchet MS';
+    src: url(font/trebuc.ttf);
+}
+
+* {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.col-35 {
+    flex: 0 0 auto;
+    width: 35%
+}
+
+.col-60 {
+    flex: 0 0 auto;
+    width: 60%
+}
+
+.col-60 .btn {
+    width: 50%;
+    margin-bottom: 10px;
+}
+
+
+.input-group {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+
+
+}
+.form-control:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: #0791ec;
+    outline: none !important;
+    box-shadow: 0 0 0 .03rem rgba(30, 116, 245, 0.25) !important
+}
+
+/* // */
+.copie {
+    color: bisque !important;
+    background-color: #06212e !important;
+}
+
+.centrer {
+    align-items: center !important;
+    text-align: center !important;
+}
+
+.color-tb {
+    background: #06212e !important;
+}
+
+div.dt-buttons .dt-button{  
+    width: 100px;  
+    color: bisque !important;
+    background-color: #06212e !important;         
+}
+.fa-solid .icon{
+    font-size: 18px !important;
+    color: blue;
+}
+/* // */
+
+.input-group-text{
+    width: 110px !important;
+}
+.btn-search{
+    background-color: rgba(6, 33, 46, 0.651);
+    color: #fff;
+}
+
+.ui-dialog{
+
+  min-width: 800px;
+}
+.dialog-form{
+    min-width: 800px;
+}
+.blocTab{  
+    border: 1px solid rgba(6, 33, 46, 0.281);
+    box-shadow: 3px 1px 5px #add6e2;
+    padding: 15px;
+    margin: 5px;
+    margin-bottom: 15px;
+}
+
+
+
+.txt{
+    width: fit-content !important;
+}
+
+.mytab tbody .text-control{
+    width: 100% !important;
+    border-radius: 0 !important;
+    background:none;
+    margin: 0 !important;
+    border-color:rgba(6, 33, 46, 0.341);
+}
+.text-control:focus{
+    border:#69b8ec !important;
+    background:none !important;
+    margin: 0 !important;
+    outline: none !important;
+}
+
+.tab-td
+{  
+  padding: 2px !important;
+   border: none; 
+
+}
+.tab-td .ico{
+    text-align: center !important;
+    align-items: center !important;
+    background-color: #8d171d;
+    color: #fff !important;
+    font-size: 20px;  
+}
+.tab-head-center{
+    text-align: center !important;
+    align-items: center !important;
+    height: fit-content !important;
+    padding: 0 !important;  
+    border: 1px solid #2af166!important; 
+    background-color: #034153c4;
+    color: white;
+}
+.mytab .th{
+    width: 150px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+
+.plus{
+background:white !important;
+padding: 0 !important;
+}
+.btnplus .ico 
+{
+    font-size: 25px !important;
+    color: #fff !important;
+}  
+.plus .btnplus{ 
+    margin-left: 3px; 
+    background-color: #16c905; 
+    height: auto !important;
+    width: fit-content !important;   
+}
+/*  */
+label,
+        input {
+            display: block;
+        }
+
+        input.text {
+            margin-bottom: 12px;
+            width: 95%;
+            padding: .4em;
+        }
+
+        fieldset {
+            padding: 0;
+            border: 0;
+            margin-top: 25px;
+        }
+
+        h1 {
+            font-size: 1.2em;
+            margin: .6em 0;
+        }
+
+        div#users-contain {
+            width: 350px;
+            margin: 20px 0;
+        }
+
+
+        div#users-contain table {
+            margin: 1em 0;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        div#users-contain table td,
+        div#users-contain table th {
+            border: 1px solid #eee;
+            padding: .6em 10px;
+            text-align: left;
+        }
+
+        .ui-dialog .ui-state-error {
+            padding: .3em;
+        }
+
+        .validateTips {
+            border: 1px solid transparent;
+            padding: 0.3em;
+        }
+       
+        .ui-dialog .ui-dialog-buttonpane button {
+            margin: .4em .4em .4em 0 !important;
+            cursor: pointer;
+            background: #8d171d;
+            color: #fff;
+            border: 1px solid ;
+            padding: 4px 10px 4px 10px;
+        }
+        .ui-dialog-titlebar-close {
+            padding: 0px !important;
+            border: none;          
+        }
+        
+        .ui-dialog .ui-dialog-titlebar-close:after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            display: inline-block;     
+            /* Change path to image*/
+            background-image: url(/assets/images/close-dialog.png);
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .dataTables-search {
+            display: none !important;
+         }
+         .dt-buttons .dt-button{
+            background-color: #16c905 !important;
+         }
+
+         .input-group-text {
+            width: 110px;
+         }
+         .input-lg{
+            
+            width: 50%;
+         }
+         
+         div.dt-container .dt-search input {              
+            display:none;
+        }
+        
+        div.dt-container {
+            margin-top: 0px !important;
+            
+        }
+       .mt-m0{
+        margin-top: 0 !important;
+       }
+       div.dt-container .pagelen{
+            width: max-content !important;
+            background-color: #8d171d;
+        }
+
+/*  */
+@media (300px <= width <=768px) {
+    .col-flex100 {
+        flex: 0 0 auto;
+        width: 100% !important
+    }
+    .row-cols-2{
+        flex: 0 0 auto;
+        width: 100% !important
+
+    }
+
+    .col-35 {
+        flex: 0 0 auto;
+        width: 100%
+    }
+
+    .col-60 {
+        flex: 0 0 auto;
+        width: 100% !important
+    }
+
+    .col-60 .btn {
+        width: 100% !important;
+        margin-bottom: 10px;
+    }
+    .ui-dialog{
+        width: 340px !important;
+        min-width: 340px !important;
+        /* height: 550px !important; */
+        min-height: max-content;
+       
+    }
+    .dialog-form{
+        width: 340px !important;
+        min-width: 340px !important;
+        height: 500px !important;
+        min-height: 500px;
+    }
+}
+
+@media (min-width:1024px) {
+    .col-35 {
+        flex: 0 0 auto;
+        width: 50% !important
+    }
+
+    .col-60 {
+        flex: 0 0 auto;
+        width: 100% !important
+    }
+}
+@media (width > 768px) {
+
+    .col-35 {
+        flex: 0 0 auto;
+        width: 35% !important
+    }
+
+    .col-60 {
+        flex: 0 0 auto;
+        width: 60% !important
+    }
+    
+}
+
+.btn-color-pt{
+    background-color: #deb887 !important;
+    border: #0f0900;
+}
+
+.btn-color-sh{
+    background-color: #2af166 !important;
+    border: #0f0900;
+}
+
+.btn-color-f{
+    background-color: #8d171d !important;
+    border: #0f0900;
+}
+/* col-flex */
+

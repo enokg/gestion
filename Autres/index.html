@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Imagination Invoice Example</title>
+
+
+<link href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/b-2.3.5/b-html5-2.3.5/datatables.min.css"/> 
+<link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/1.13.3/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.bootstrap5.min.css" rel="stylesheet">
+  <!-- For Bootstrap-->
+ 
+<link rel="stylesheet" href="style.css" type="text/css" />
+  <!-- CSS For Print Format -->
+  <link rel="stylesheet" media="print" href="invoiceprint.css">
+
+  <!-- CSS For Invoice -->
+  <link rel="stylesheet" href="invoice.css">
+
+  <!-- jQuery CDN -->
+<link rel="stylesheet" href="LES CSS/styleCust.css">
+  
+  <!-- For Invoice  -->
+  
+   <script src="table2.js" type="text/javascript"></script>
+   <!-- <script src="table1.js" type="text/javascript"></script> -->
+   <script src="invoice.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+  <script src = "https://code.jquery.com/jquery-3.5.1.js" ></script>
+	<script src = "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/js/bootstrap.bundle.min.js" > </script> 
+	<script src = "https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js" > </script> 
+	<script src = "https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js" > </script> 
+	<script src = "https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js" > </script> 
+	<script src = "https://cdn.datatables.net/responsive/2.4.0/js/responsive.bootstrap5.min.js" > </script>
+  
+</head>
+
+<body>
+
+
+  <div class="container ">
+
+    <form method="POST" class="needs-validation" novalidate
+      action="https://script.google.com/a/~/macros/s/AKfycbw26z64CsR-MYWhQMqnn4Mh16GljVb4sNgbELYtDMa5O6p56vpfIvY4pzODmVyGxZ599A/exec">
+
+      <div class="card mt-3">
+        <div class="card-header text-center">
+          <h4>FACTURATION</h4>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-60 col-flex100">
+              <div class="input-group mb-3">
+                <span class="input-group-text">Customer</span>
+                <input type="text" class="form-control" placeholder="Customer" name="cust_nm" required minlength="4">
+
+                <div class="invalid-feedback">
+                  Veuillez saisir le nom du client </div>
+              </div>
+
+              <div class="input-group mb-3">
+                <span class="input-group-text">Address</span>
+                <input type="text" class="form-control" placeholder="Address" name="addr">
+              </div>
+
+              <div class="input-group mb-3">
+                <span class="input-group-text">City</span>
+                <input type="text" class="form-control" placeholder="City" name="city">
+              </div>
+            </div>
+
+            <div class="col-35 col-flex100">
+
+              <div class="input-group mb-3">
+                <span class="input-group-text">Fact. N°</span>
+                <input type="text" class="form-control" placeholder="Inv. No" id="inv_no" name="inv_no"
+                  autocomplete="off" required>
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="button" onclick="Search();">
+                    <i class="bi bi-search"></i></button>
+                </div>
+                <div class="valid-feedback">Le numéro Facture est
+                  OK</div>
+              </div>
+
+
+              <div class="input-group mb-3">
+                <span class="input-group-text">Date Fact.</span>
+                <input type="date" class="form-control" placeholder="Inv. Date" name="inv_dt">
+              </div>
+
+            </div>
+
+          </div>
+
+          <input type="hidden" id="IsNew" name="IsNew" value="Y">
+          <input type="hidden" id="StartRow" name="StartRow" value="0">
+          <input type="hidden" id="RowCount" name="RowCount" value="0">
+
+          <table class="table table-bordered">
+            <thead class="table-success">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Designation</th>
+                <th scope="col" class="text-end">Qty</th>
+                <th scope="col" class="text-end">Prix.Ut</th>
+                <th scope="col" class="text-end">Montant</th>
+                <th scope="col" class="NoPrint">
+                  <button type="button" class="btn btn-sm btn-success" onclick="BtnAdd()">+</button>
+                </th>
+
+              </tr>
+            </thead>
+            <tbody id="TBody">
+              <tr id="TRow" class="d-none">
+                <th scope="row">1</th>
+                <td>
+                  <input class="form-control " name="item_nm" list="mylist" autocomplete="off" required value="a">
+                  <datalist id="mylist"></datalist>
+                </td>
+                <td><input type="number" class="form-control text-end" name="qty" onchange="Calc(this);"></td>
+                <td><input type="number" class="form-control text-end" name="rate" onchange="Calc(this);"></td>
+                <td><input type="number" class="form-control text-end" name="amt" value="0" readonly=""></td>
+                <td class="NoPrint">
+                  <button type="button" class="btn btn-sm btn-danger" onclick="BtnDel(this)">X</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="row">
+            <div class="col-60">
+              <button type="submit" class="btn btn-primary">Valider</button>
+              <button type="button" class="btn btn-primary btn-color-pt" onclick="GetPrint()">Imprimer</button>
+              <button type="button" class="btn btn-primary btn-color-sh" onclick="ShowAllData()">Afficher</button>
+            </div>
+
+            <div class="col-35">
+              <div class="input-group mb-3">
+                <span class="input-group-text">Total</span>
+                <input type="number" class="form-control text-end" id="FTotal" name="FTotal" disabled="">
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">Remise</span>
+                <input type="number" class="form-control text-end" id="FGST" name="FGST" onchange="GetTotal()">
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">Montant net</span>
+                <input type="number" class="form-control text-end" id="FNet" name="FNet" disabled="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Afficher la facture</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+        <div class="modal-body">
+
+
+          <table class="table table-striped">
+            <tbody id="MyTBody"></tbody>
+          </table>
+
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-color-f" data-bs-dismiss="modal">Fermer</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  
+  <div class="container-fluid">
+  <div id="d_table" class="table table-striped table-bordered nowrap" style="width:100%"></div>
+</div>
+
+<!-- The Data Table is inserted here by JavaScript ------------------ -->
+<table id="dataTable" class="table table-striped table-bordered nowrap" style="width:100%"></table>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script> -->
+    <!-- <script src="table.js" type="text/javascript"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+</body>
+
+</html>
