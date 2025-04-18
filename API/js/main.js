@@ -417,7 +417,7 @@ function addRecord(){
      {
         method: 'POST',
         body: formData,
-        mode:'no-cors'
+        //mode:'no-cors'
       })
       .then(response => {        
         return response.json()})
